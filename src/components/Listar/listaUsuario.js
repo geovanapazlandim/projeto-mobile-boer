@@ -4,15 +4,16 @@ import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
 
 import Icon from "react-native-vector-icons/Ionicons";
 
-export default function ListagemUsuario({ data, deleteItem, editItem }) {
+export default function Listagem({ data, deleteItem, editItem }) {
   return (
     <View style={styles.container}>
       <Text style={styles.text}>Nome: {data.name}</Text>
-      <Text style={styles.text}>Login: {data.login}</Text>
-      <Text style={styles.text}>Cadastrar Senha: {data.createPassword}</Text>
-      <Text style={styles.text}>Confirmar Senha: {data.ConfirmedPassword}</Text>
 
-      
+      <Text style={styles.text}>Email: {data.email}</Text>
+
+      <Text style={styles.text}>Categoria: {data.category}</Text>
+
+      <Text style={styles.text}>Senha: {data.password}</Text>
 
       <View style={styles.item}>
         <TouchableOpacity onPress={() => deleteItem(data.key)}>

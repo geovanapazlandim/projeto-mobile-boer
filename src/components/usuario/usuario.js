@@ -13,25 +13,24 @@ import {
 
 } from "react-native";
 import firebase from "../../services/connectionFirebase";
-import Listagem from "../Listar/listagem";
+import Listagem from "../Listar/listaUsuario";
 
-export default function GerenciarProdutos() {
+export default function CadastrarUsuario() {
   const [name, setName] = useState("");
-  const [brand, setBrand] = useState("");
-  const [image, setImage] = useState("");
-  const [price, setPrice] = useState("");
+  const [email, setEmail] = useState("");
   const [category, setCategory] = useState("");
+  const [password, setPassword] = useState("");
   const [key, setKey] = useState("");
-  const [produtos, setProdutos] = useState([]);
+  const [people, setPeople] = useState([]);
   const [loading, setLoading] = useState(true);
   const inputRef = useRef(null);
   useEffect(() => {
 
     async function dados() {
 
-      await firebase.database().ref('produtos').on('value', (snapshot) => {
+      await firebase.database().ref('person').on('value', (snapshot) => {
 
-        setProdutos([]);
+        setPeople([]);
 
         snapshot.forEach((chilItem) => {
 
@@ -41,17 +40,15 @@ export default function GerenciarProdutos() {
 
             name: chilItem.val().name,
 
-            brand: chilItem.val().brand,
-
-            price: chilItem.val().price,
-
-            image: chilItem.val().image,
+            email: chilItem.val().email,
 
             category: chilItem.val().category,
 
+            password: chilItem.val().password,
+
           };
 
-          setProdutos(oldArray => [...oldArray, data].reverse());
+          setPeople(oldArray => [...oldArray, data].reverse());
 
         })
 
@@ -66,54 +63,51 @@ export default function GerenciarProdutos() {
   }, []);
   async function insertUpdate() {
     //editar dados
-    if ((name !== "") & (brand !== "") & (price !== "") & (image !== "") & (category !== "") & (key !== "")) {
-      firebase.database().ref("produtos").child(key).update({
+    if ((name !== "") & (email !== "") & (category !== "") & (password !== "") & (key !== "")) {
+      firebase.database().ref("person").child(key).update({
         name: name,
-        brand: brand,
-        price: price,
-        image: image,
+        email: email,
         category: category,
+        password: password,
       });
       //para o teclado do celular fixo abaixo do formulario(não flutuante)
       Keyboard.dismiss();
-      alert("Dados dos Cosméticos Alterados com Sucesso!");
+      alert("Usuário cadastrado com sucesso");
       clearData();
       setKey("");
       return;
     }
     //cadastrar dados - insert
-    let produto = await firebase.database().ref("produtos");
-    let chave = produto.push().key;
+    let people = await firebase.database().ref("person");
+    let chave = people.push().key;
 
-    produto.child(chave).set({
-      name: name,
-      brand: brand,
-      price: price,
-      image: image,
-      category: category,
+    people.child(chave).set({
+        name: name,
+        email: email,
+        category: category,
+        password: password,
     });
 
-    alert("Produto Cadastrado!");
+    alert("Usuário Cadastrado!");
     clearData();
   }
   //função para limpar os dados da tela
   function clearData() {
     setName("");
-    setBrand("");
-    setPrice("");
+    setEmail("");
     setCategory("");
-    setImage("");
+    setPassword("");
   }
   //função para excluir um item
   function handleDelete(key) {
 
-    firebase.database().ref('produtos').child(key).remove()
+    firebase.database().ref('person').child(key).remove()
 
       .then(() => {
 
-        const findProdutos = produtos.filter(item => item.key !== key)
+        const findPeople = people.filter(item => item.key !== key)
 
-        setProdutos(findProdutos)
+        setPeople(findPeople)
 
       })
 
@@ -126,19 +120,17 @@ export default function GerenciarProdutos() {
 
       setName(data.name),
 
-      setBrand(data.brand),
-
-      setPrice(data.price),
+      setEmail(data.email),
 
       setCategory(data.category),
 
-      setImage(data.image)
+      setPassword(data.password)
 
   }
   return (
     <View style={style.container}>
       <SafeAreaView style={style.SafeAreaView}>
-        <Text style={style.text}>Cadastro de Produtos</Text>
+        <Text style={style.text}>Cadastrar Usuário</Text>
 
         <TextInput
           placeholder="Nome"
@@ -149,14 +141,14 @@ export default function GerenciarProdutos() {
         />
 
         <TextInput
-          placeholder="Marca"
+          placeholder="informe seu endereço de e-mail"
           style={style.input}
-          value={brand}
-          onChangeText={(text) => setBrand(text)}
+          value={email}
+          onChangeText={(text) => setEmail(text)}
           ref={inputRef}
         />
         <TextInput
-          placeholder="Categoria"
+          placeholder="Tipo de produto favorito"
           style={style.input}
           value={category}
           onChangeText={(text) => setCategory(text)}
@@ -164,18 +156,10 @@ export default function GerenciarProdutos() {
         />
 
         <TextInput
-          placeholder="Imagem"
+          placeholder="Password"
           style={style.input}
-          value={image}
-          onChangeText={(text) => setImage(text)}
-          ref={inputRef}
-        />
-
-        <TextInput
-          placeholder="Preço"
-          style={style.input}
-          value={price}
-          onChangeText={(text) => setPrice(text)}
+          value={password}
+          onChangeText={(text) => setPassword(text)}
           ref={inputRef}
         />
         <View style={style.button}>
@@ -192,7 +176,7 @@ export default function GerenciarProdutos() {
       </SafeAreaView>
       <View style={style.blocoLista}>
 
-        <Text style={style.text}>Listagem de Produtos</Text>
+        <Text style={style.text}>Lista de Usuários</Text>
 
 
         {loading ?
@@ -209,7 +193,7 @@ export default function GerenciarProdutos() {
 
               keyExtractor={item => item.key}
 
-              data={produtos}
+              data={people}
 
               renderItem={({ item }) => (
 
@@ -272,7 +256,7 @@ const style = StyleSheet.create({
     color: "",
   },
   SafeAreaView: {
-    flex: 3
+    flex: 2
   },
   blocoLista: {
     flex: 3
