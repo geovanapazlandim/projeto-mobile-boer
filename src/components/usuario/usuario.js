@@ -169,38 +169,20 @@ export default function CadastrarUsuario() {
             color="#29AB87"
             accessibilityLabel=""
           />
-
-
         </View>
-
       </SafeAreaView>
       <View style={style.blocoLista}>
-
         <Text style={style.text}>Lista de Usuários</Text>
-
-
         {loading ?
-
           (
-
             <ActivityIndicator color="#121212" size={45} />
-
           ) :
-
-          (
-
-            <FlatList
-
+          (<FlatList
               keyExtractor={item => item.key}
-
               data={people}
-
               renderItem={({ item }) => (
-
                 <Listagem data={item} deleteItem={handleDelete}
-
                   editItem={handleEdit} />
-
               )}
 
             />
@@ -256,10 +238,10 @@ const style = StyleSheet.create({
     color: "",
   },
   SafeAreaView: {
-    flex: 2
+    flex: 1
   },
   blocoLista: {
-    flex: 3
+    flex: 1
   }
 
 });

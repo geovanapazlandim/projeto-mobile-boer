@@ -272,10 +272,11 @@ const style = StyleSheet.create({
     color: "",
   },
   SafeAreaView: {
-    flex: 3
+    flex: 2
   },
   blocoLista: {
-    flex: 3
+    flex: 1,
+    padding: 30
   }
 
 });

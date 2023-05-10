@@ -10,13 +10,18 @@ import {
   Image
 } from "react-native";
 import React, { useState } from "react";
+
 import firebase from "../../services/connectionFirebase";
+import CadastrarUsuario from "../usuario/usuario";
 
 export default function Login({changeStatus}) {
   const [type, setType] = useState("login");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-
+  
+  const cadastro = () => {
+    return (onPress = CadastrarUsuario)
+  }
   function handleLogin() {
     console.log(email.toString());
     console.log(password.toString());
@@ -48,7 +53,7 @@ export default function Login({changeStatus}) {
         });
     }
   }
-
+  
   return (
     
     <SafeAreaView style={styles.container}>
@@ -96,9 +101,11 @@ export default function Login({changeStatus}) {
               setType((type) => (type === "login" ? "cadastrar" : "login"))
             }
           >
-            <Text style={{ textAlign: "center", backgroundColor:"#fff", marginTop:'2%' }}>
-              {type === "login" ? "Criar uma conta" : "Já possuo uma conta"}
-            </Text>
+            <TouchableOpacity 
+            onPress={cadastro}
+            style={{ textAlign: "center", backgroundColor:"#fff", marginTop:'2%' }}>
+              <Text>Crie sua conta aqui</Text>
+            </TouchableOpacity>
           </TouchableOpacity>
         </Card>
       </Card>
