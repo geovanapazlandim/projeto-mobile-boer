@@ -2,6 +2,7 @@ import { Card } from 'react-native-paper';
 import { View, StyleSheet, Button, Image, Text } from 'react-native';
 import React from 'react';
 import { SafeAreaFrameContext } from 'react-native-safe-area-context';
+
 //import firebase from '../../services/connectionFirebase';
 
 export default class TelaPrincipal extends React.Component

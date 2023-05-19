@@ -5,6 +5,8 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import Icon from "react-native-vector-icons/Ionicons";
 import GerenciarProdutos from "../Produtos/produtos";
 import CadastrarUsuario from "../CadastrarUsuario/cadastrarUsuario";
+import ScreenFilms from '../Filmes/screenfilmes';
+import ScreenProdutosLolla from "../Lolla/ScreenProdutosLolla";
 //import LinearGradient from 'react-native-linear-gradient';
 
 function HomeScreen() {
@@ -38,12 +40,8 @@ function HomeScreen() {
   );
 }
 
-function ListScreen() {
-  return (
-    <View style={styles.container}>
-      <Text>Esta é a lista</Text>
-    </View>
-  );
+function LerApiDogScreen() {
+  return<ScreenProdutosLolla/>
 }
 
 function PostScreen() {
@@ -54,12 +52,8 @@ function PostScreen() {
   );
 }
 
-function NotificationsScreen() {
-  return (
-    <View style={styles.container}>
-      <Text>Aqui ficam as notificações</Text>
-    </View>
-  );
+function LerApiScreen() {
+  return <ScreenFilms/>
 }
 function Usuarios() {
   return (
@@ -82,13 +76,13 @@ export default function App() {
               case "Home":
                 iconName = "home";
                 break;
-              case "Lista":
+              case "Produtos Lolla":
                 iconName = "list-outline";
                 break;
               case "Cadastrar":
                 iconName = "save-outline";
                 break;
-              case "Notificações":
+              case "Filmes":
                 iconName = "add-circle-outline";
                 break;
               case"CadastrarUsuario":
@@ -108,9 +102,9 @@ export default function App() {
         }}
       >
         <Tab.Screen name="Home" component={HomeScreen} />
-        <Tab.Screen name="Lista" component={ListScreen} />
+        <Tab.Screen name="Lolla" component={LerApiDogScreen} />
         <Tab.Screen name="Cadastrar" component={PostScreen} />
-        <Tab.Screen name="Notificações" component={NotificationsScreen} />
+        <Tab.Screen name="Filmes" component={LerApiScreen} />
         <Tab.Screen name="Cadastrar Usuário" component={CadastrarUsuario} />
       </Tab.Navigator>
     </NavigationContainer>
