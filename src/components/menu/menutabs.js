@@ -5,7 +5,7 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import Icon from "react-native-vector-icons/Ionicons";
 import GerenciarProdutos from "../Produtos/produtos";
 import CadastrarUsuario from "../CadastrarUsuario/cadastrarUsuario";
-import ScreenFilms from '../Filmes/screenfilmes';
+import ScreenFilms from "../Filmes/screenfilmes";
 import ScreenProdutosLolla from "../Lolla/ScreenProdutosLolla";
 //import LinearGradient from 'react-native-linear-gradient';
 
@@ -41,7 +41,7 @@ function HomeScreen() {
 }
 
 function LerApiDogScreen() {
-  return<ScreenProdutosLolla/>
+  return <ScreenProdutosLolla />;
 }
 
 function PostScreen() {
@@ -51,14 +51,21 @@ function PostScreen() {
     </View>
   );
 }
+function Usuario() {
+  return (
+    <View style={styles.container}>
+      <CadastrarUsuario />
+    </View>
+  );
+}
 
 function LerApiScreen() {
-  return <ScreenFilms/>
+  return <ScreenFilms />;
 }
 function Usuarios() {
   return (
     <View style={styles.container}>
-      <CadastrarUsuario/>
+      <CadastrarUsuario />
     </View>
   );
 }
@@ -85,8 +92,10 @@ export default function App() {
               case "Filmes":
                 iconName = "add-circle-outline";
                 break;
-              case"CadastrarUsuario":
+              case "CadastrarUsuario":
                 iconName = "person-circle-outline";
+                break;
+
               default:
                 iconName = "person-circle-outline";
                 break;
