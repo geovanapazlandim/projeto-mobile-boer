@@ -4,7 +4,6 @@ import { NavigationContainer } from "@react-navigation/native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import Icon from "react-native-vector-icons/Ionicons";
 import GerenciarProdutos from "../Produtos/produtos";
-import CadastrarUsuario from "../CadastrarUsuario/cadastrarUsuario";
 import ScreenFilms from "../Filmes/screenfilmes";
 import ScreenProdutosLolla from "../Lolla/ScreenProdutosLolla";
 //import LinearGradient from 'react-native-linear-gradient';
@@ -114,7 +113,6 @@ export default function App() {
         <Tab.Screen name="Lolla" component={LerApiDogScreen} />
         <Tab.Screen name="Cadastrar" component={PostScreen} />
         <Tab.Screen name="Filmes" component={LerApiScreen} />
-        <Tab.Screen name="Cadastrar Usuário" component={CadastrarUsuario} />
       </Tab.Navigator>
     </NavigationContainer>
   );
